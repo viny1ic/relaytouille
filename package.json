@@ -1,0 +1,16 @@
+{
+  "name": "home_automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "johnny-five": "^2.0.0",
+    "serialport": "^9.2.0"
+  }
+}
