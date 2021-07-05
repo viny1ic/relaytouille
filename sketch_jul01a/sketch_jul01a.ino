@@ -14,7 +14,7 @@ void setup() {
       relay[i]=EEPROM.read(i);
       Serial.println(relay[0]);
     }  
-  
+  while(!Serial.available());
 }
 
 void loop() {

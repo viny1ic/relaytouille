@@ -1,37 +1,32 @@
 var bodyParser = require('body-parser')
 var path = require('path')
-var five = require("johnny-five"),
-  board = new five.Board(),
-  led = null;
+const { exec } = require("child_process");
+
 var express = require('express')
 var  app = express()
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname,'./')))
 
-board.on("ready", function() {
-  console.log("### Board ready!");
-  led = new five.Led(13);
-  led.on();
-});
-var relay=0
-
 
 app.get('/', function(req,res){
     res.sendFile(path.join(__dirname, 'index.html'))
 })
 app.post("/relay", function(req,res){
-    relay=req.body.switches
-    console.log(req.body)
-    var abc = new five.Pin(parseInt(relay)+1)
-    if(req.body.toggle=='on'){
-        abc.high()
-        console.log('high')
-    }
-    if(req.body.toggle=='off'){
-        abc.low()
-        console.log('low')
-    }
+    
+    // implement call to python script
+    var num = req.body.switches-1
+    exec(`python arduino.py -n ${num}`, (error, stdout, stderr) => {
+        if (error) {
+            console.log(`error: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.log(`stderr: ${stderr}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+    });
     res.sendStatus(200)
 
 })
