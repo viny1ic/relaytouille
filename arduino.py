@@ -2,9 +2,14 @@ import serial
 import time
 import argparse
 
-for i in range(4):
+try:
+    arduino = serial.Serial(port='/dev/ttyS'+i, baudrate=9600, timeout=.1)
+except:
+    print('yo')
+
+for i in range(64):
     try:
-        arduino = serial.Serial(port='/dev/ttyS'+i, baudrate=9600, timeout=.1)
+        arduino = serial.Serial(port='/dev/tty'+i, baudrate=9600, timeout=.1)
         print("ans = "+i)
     except:
         print('yo')
