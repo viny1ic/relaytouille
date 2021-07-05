@@ -2,8 +2,12 @@ import serial
 import time
 import argparse
 
-arduino = serial.Serial(port='/dev/CH34x', baudrate=9600, timeout=.1)
-
+for i in range(4):
+    try:
+        arduino = serial.Serial(port='/dev/ttyS'+i, baudrate=9600, timeout=.1)
+        print("ans = "+i)
+    except:
+        pass
 def write_read(x):
     arduino.write(bytes(x, 'utf-8'))
     time.sleep(0.05)
