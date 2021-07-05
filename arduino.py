@@ -7,7 +7,7 @@ for i in range(4):
         arduino = serial.Serial(port='/dev/ttyS'+i, baudrate=9600, timeout=.1)
         print("ans = "+i)
     except:
-        pass
+        print('yo')
 def write_read(x):
     arduino.write(bytes(x, 'utf-8'))
     time.sleep(0.05)
