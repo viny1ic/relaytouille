@@ -2,7 +2,7 @@ import serial
 import time
 import argparse
 
-arduino = serial.Serial(port='COM3', baudrate=9600, timeout=.1)
+arduino = serial.Serial(port='CH34x', baudrate=9600, timeout=.1)
 
 def write_read(x):
     arduino.write(bytes(x, 'utf-8'))
