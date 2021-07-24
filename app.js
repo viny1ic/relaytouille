@@ -15,11 +15,16 @@ app.get('/', function(req,res){
 app.get('/Kali-Linux-GUI', function(req,res){
     res.sendFile(path.join(__dirname, '../index.html'))
 })
+app.get('/admin', function(req,res){
+    res.sendFile(path.join(__dirname, '../admin.html'))
+})
 app.get("/relay", function(req,res){
     
     // implement call to python script
-    var num = req.body.switches-1
-    var status = req.body.status
+    var num = req.query.switches-1
+    var status = req.query.status
+    console.log(num + typeof(num))
+    console.log(status + typeof(status))
     exec(`sudo python relay.py -n ${num} -v ${status}`, (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
@@ -35,6 +40,6 @@ app.get("/relay", function(req,res){
 
 })
 
-app.listen(8000, function () {
-    console.log('Listening on port ' + 8000);
+app.listen(80, function () {
+    console.log('Listening on port ' + 80);
    });
