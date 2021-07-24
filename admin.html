@@ -16,9 +16,9 @@
     <script>
         function login(){
             console.log(document.getElementById("login").elements[0].value)
-            if(document.getElementById("login").elements[0].value=='admin' && document.getElementById("login").elements[1].value=='admin'){
+            if(document.getElementById("login").elements[0].value=='admin' && md5(document.getElementById("login").elements[1].value)=='42f749ade7f9e195bf475f37a44cafcb'){
                 window.location.href = "console.html"
-                alert('suck cess')
+                console.log('suck cess')
             }
         }
     </script>
