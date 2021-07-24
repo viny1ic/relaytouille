@@ -10,13 +10,17 @@ app.use(express.static(path.join(__dirname,'./')))
 
 
 app.get('/', function(req,res){
-    res.sendFile(path.join(__dirname, 'index.html'))
+    res.sendFile(path.join(__dirname, '../index.html'))
 })
-app.post("/relay", function(req,res){
+app.get('/Kali-Linux-GUI', function(req,res){
+    res.sendFile(path.join(__dirname, '../index.html'))
+})
+app.get("/relay", function(req,res){
     
     // implement call to python script
     var num = req.body.switches-1
-    exec(`python arduino.py -n ${num}`, (error, stdout, stderr) => {
+    var status = req.body.status
+    exec(`sudo python relay.py -n ${num} -v ${status}`, (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
             return;
